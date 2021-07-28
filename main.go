@@ -11,13 +11,14 @@ func (fsys *osFS) Open(name string) (fs.File, error) {
 	if f == nil {
 		return nil, err
 	}
-	return f, err
+  return f, err
 }
 func (fsys *osFS) ReadDir(name string) ([]fs.DirEntry, error) {
 	return os.ReadDir(name)
 }
 func main() {
 	if err := run(); err != nil {
+		_, _ = fmt.Fprintln(os.Stderr, err)
 		_, _ = fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
