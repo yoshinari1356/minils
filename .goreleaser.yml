@@ -1,0 +1,28 @@
+before:
+  hooks:
+    # ビルド前に go mod tidy を実行する
+    - go mod tidy
+builds:
+    # 環境変数
+  - env:
+      - CGO_ENABLED=0
+    # クロスコンパイスをするOS
+    goos:
+      - linux
+      - windows
+      - darwin
+archives:
+    # バイナリ以外に同梱するファイル
+  - files:
+    - CREDITS
+    - LICENSE
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
